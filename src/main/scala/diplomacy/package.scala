@@ -178,13 +178,96 @@ import scala.language.implicitConversions
   */
 package object diplomacy
 {
-  type SimpleNodeHandle[D, U, E, B <: Chisel.Data] = NodeHandle[D, U, E, B, D, U, E, B]
-  type AnyMixedNode = MixedNode[_, _, _, _ <: Data, _, _, _, _ <: Data]
-
-  def sourceLine(sourceInfo: SourceInfo, prefix: String = " (", suffix: String = ")") = sourceInfo match {
-    case SourceLine(filename, line, col) => s"$prefix$filename:$line:$col$suffix"
-    case _ => ""
-  }
+  /* compatibility mode to stand alone diplomacy. */
+  type LazyModule = _root_.diplomacy.LazyModule
+  val LazyModule = _root_.diplomacy.LazyModule
+  type LazyModuleImpLike = _root_.diplomacy.LazyModuleImpLike
+  type LazyModuleImp = _root_.diplomacy.LazyModuleImp
+  type LazyRawModuleImp = _root_.diplomacy.LazyRawModuleImp
+  type SimpleLazyModule = _root_.diplomacy.SimpleLazyModule
+  type LazyScope = _root_.diplomacy.LazyScope
+  val LazyScope = _root_.diplomacy.LazyScope
+  type HalfEdge = _root_.diplomacy.HalfEdge
+  val HalfEdge = _root_.diplomacy.HalfEdge
+  type Dangle = _root_.diplomacy.Dangle
+  val Dangle = _root_.diplomacy.Dangle
+  type AutoBundle = _root_.diplomacy.AutoBundle
+  type ModuleValue[T] = _root_.diplomacy.ModuleValue[T]
+  val InModuleBody = _root_.diplomacy.InModuleBody
+  val MonitorsEnabled = _root_.diplomacy.MonitorsEnabled
+  val RenderFlipped = _root_.diplomacy.RenderFlipped
+  val RenderedEdge = _root_.diplomacy.RenderedEdge
+  type RenderedEdge = _root_.diplomacy.RenderedEdge
+  type InwardNodeImp[DI, UI, EI, BI <: Data] = _root_.diplomacy.InwardNodeImp[DI, UI, EI, BI]
+  type OutwardNodeImp[DO, UO, EO, BO <: Data] = _root_.diplomacy.OutwardNodeImp[DO, UO, EO, BO]
+  type NodeImp[D, U, EO, EI, B <: Data] = _root_.diplomacy.NodeImp[D, U, EO, EI, B]
+  type SimpleNodeImp[D, U, E, B <: Data] = _root_.diplomacy.SimpleNodeImp[D, U, E, B]
+  type BaseNode = _root_.diplomacy.BaseNode
+  val BaseNode = _root_.diplomacy.BaseNode
+  type FormatEdge = _root_.diplomacy.FormatEdge
+  type FormatNode[I <: FormatEdge, O <: FormatEdge] = _root_.diplomacy.FormatNode[I, O]
+  type NoHandle = _root_.diplomacy.NoHandle
+  val NoHandleObject = _root_.diplomacy.NoHandleObject
+  type NodeHandle[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data] = _root_.diplomacy.NodeHandle[DI, UI, EI, BI, DO, UO, EO, BO]
+  val NodeHandle = _root_.diplomacy.NodeHandle
+  type NodeHandlePair[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data] = _root_.diplomacy.NodeHandlePair[DI, UI, EI, BI, DO, UO, EO, BO]
+  type InwardNodeHandle[DI, UI, EI, BI <: Data] = _root_.diplomacy.InwardNodeHandle[DI, UI, EI, BI]
+  type NodeBinding = _root_.diplomacy.NodeBinding
+  val BIND_ONCE = _root_.diplomacy.BIND_ONCE
+  val BIND_QUERY = _root_.diplomacy.BIND_QUERY
+  val BIND_STAR = _root_.diplomacy.BIND_STAR
+  val BIND_FLEX = _root_.diplomacy.BIND_FLEX
+  type InwardNode[DI, UI, BI <: Data] = _root_.diplomacy.InwardNode[DI, UI, BI]
+  type OutwardNodeHandle[DO, UO, EO, BO <: Data] = _root_.diplomacy.OutwardNodeHandle[DO, UO, EO, BO]
+  type OutwardNode[DO, UO, BO <: Data] = _root_.diplomacy.OutwardNode[DO, UO, BO]
+  type CycleException = _root_.diplomacy.CycleException
+  type StarCycleException = _root_.diplomacy.StarCycleException
+  type DownwardCycleException = _root_.diplomacy.DownwardCycleException
+  type UpwardCycleException = _root_.diplomacy.UpwardCycleException
+  val Edges = _root_.diplomacy.Edges
+  type Edges[EI, EO] = _root_.diplomacy.Edges[EI, EO]
+  type MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data] = _root_.diplomacy.MixedNode[DI, UI, EI, BI, DO, UO, EO, BO]
+  type MixedCustomNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data] = _root_.diplomacy.MixedCustomNode[DI, UI, EI, BI, DO, UO, EO, BO]
+  type CustomNode[D, U, EO, EI, B <: Data] = _root_.diplomacy.CustomNode[D, U, EO, EI, B]
+  type MixedJunctionNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data] = _root_.diplomacy.MixedJunctionNode[DI, UI, EI, BI, DO, UO, EO, BO]
+  type JunctionNode[D, U, EO, EI, B <: Data] = _root_.diplomacy.JunctionNode[D, U, EO, EI, B]
+  type MixedAdapterNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data] = _root_.diplomacy.MixedAdapterNode[DI, UI, EI, BI, DO, UO, EO, BO]
+  type AdapterNode[D, U, EO, EI, B <: Data] = _root_.diplomacy.AdapterNode[D, U, EO, EI, B]
+  type IdentityNode[D, U, EO, EI, B <: Data] = _root_.diplomacy.IdentityNode[D, U, EO, EI, B]
+  type EphemeralNode[D, U, EO, EI, B <: Data] = _root_.diplomacy.EphemeralNode[D, U, EO, EI, B]
+  type MixedNexusNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data] = _root_.diplomacy.MixedNexusNode[DI, UI, EI, BI, DO, UO, EO, BO]
+  type NexusNode[D, U, EO, EI, B <: Data] = _root_.diplomacy.NexusNode[D, U, EO, EI, B]
+  type SourceNode[D, U, EO, EI, B <: Data] = _root_.diplomacy.SourceNode[D, U, EO, EI, B]
+  type SinkNode[D, U, EO, EI, B <: Data] = _root_.diplomacy.SinkNode[D, U, EO, EI, B]
+  type BundleBridgeParams[T <: Data] = _root_.diplomacy.BundleBridgeParams[T]
+  val BundleBridgeParams = _root_.diplomacy.BundleBridgeParams
+  type BundleBridgeEdgeParams[T <: Data] = _root_.diplomacy.BundleBridgeEdgeParams[T]
+  type BundleBridgeImp[T <: Data] = _root_.diplomacy.BundleBridgeImp[T]
+  type BundleBridgeSink[T <: Data] = _root_.diplomacy.BundleBridgeSink[T]
+  val BundleBridgeSink = _root_.diplomacy.BundleBridgeSink
+  type BundleBridgeSource[T <: Data] = _root_.diplomacy.BundleBridgeSource[T]
+  val BundleBridgeSource = _root_.diplomacy.BundleBridgeSource
+  type BundleBridgeIdentityNode[T <: Data] = _root_.diplomacy.BundleBridgeIdentityNode[T]
+  val BundleBridgeIdentityNode = _root_.diplomacy.BundleBridgeIdentityNode
+  type BundleBridgeEphemeralNode[T <: Data] = _root_.diplomacy.BundleBridgeEphemeralNode[T]
+  val BundleBridgeEphemeralNode = _root_.diplomacy.BundleBridgeEphemeralNode
+  val BundleBridgeNameNode = _root_.diplomacy.BundleBridgeNameNode
+  type BundleBridgeNexusNode[T <: Data] = _root_.diplomacy.BundleBridgeNexusNode[T]
+  type BundleBridgeNexus[T <: Data] = _root_.diplomacy.BundleBridgeNexus[T]
+  val BundleBridgeNexus = _root_.diplomacy.BundleBridgeNexus
+  val BundleBroadcast = _root_.diplomacy.BundleBroadcast
+  type ValName = _root_.diplomacy.ValName
+  val ValName = _root_.diplomacy.ValName
+  type SimpleNodeHandle[D, U, E, B <: Chisel.Data] = _root_.diplomacy.SimpleNodeHandle[D, U, E, B]
+  type AnyMixedNode = _root_.diplomacy.AnyMixedNode
+  type BundleBridgeInwardNode[T <: Data] = _root_.diplomacy.BundleBridgeInwardNode[T]
+  type BundleBridgeOutwardNode[T <: Data] = _root_.diplomacy.BundleBridgeOutwardNode[T]
+  type BundleBridgeNode[T <: Data] = _root_.diplomacy.BundleBridgeNode[T]
+  def sourceLine(sourceInfo: SourceInfo, prefix: String = " (", suffix: String = ")") = _root_.diplomacy.sourceLine(sourceInfo, prefix, suffix)
+  def EnableMonitors[T](body: Parameters => T)(implicit p: Parameters) = _root_.diplomacy.EnableMonitors(body)(p)
+  def DisableMonitors[T](body: Parameters => T)(implicit p: Parameters) = _root_.diplomacy.DisableMonitors(body)(p)
+  def FlipRendering[T](body: Parameters => T)(implicit p: Parameters) = _root_.diplomacy.FlipRendering(body)(p)
+  implicit def moduleValue[T](value: ModuleValue[T]): T = _root_.diplomacy.moduleValue(value)
 
   def bitIndexes(x: BigInt, tail: Seq[Int] = Nil): Seq[Int] = {
     require (x >= 0)
@@ -222,21 +305,5 @@ package object diplomacy
     def asProperty: Seq[ResourceValue] = Seq(ResourceReference(x.label))
   }
 
-  def EnableMonitors[T](body: Parameters => T)(implicit p: Parameters) = body(p.alterPartial {
-    case MonitorsEnabled => true
-  })
-  def DisableMonitors[T](body: Parameters => T)(implicit p: Parameters) = body(p.alterPartial {
-    case MonitorsEnabled => false
-  })
-  def FlipRendering[T](body: Parameters => T)(implicit p: Parameters) = body(p.alterPartial {
-    case RenderFlipped => !p(RenderFlipped)
-  })
-
-  implicit def moduleValue[T](value: ModuleValue[T]): T = value.getWrappedValue
-
   implicit def noCrossing(value: NoCrossing.type): ClockCrossingType = SynchronousCrossing(BufferParams.none)
-
-  type BundleBridgeInwardNode[T <: Data] = InwardNodeHandle[BundleBridgeParams[T], BundleBridgeParams[T], BundleBridgeEdgeParams[T], T]
-  type BundleBridgeOutwardNode[T <: Data] = OutwardNodeHandle[BundleBridgeParams[T], BundleBridgeParams[T], BundleBridgeEdgeParams[T], T]
-  type BundleBridgeNode[T <: Data] = NodeHandle[BundleBridgeParams[T], BundleBridgeParams[T], BundleBridgeEdgeParams[T], T, BundleBridgeParams[T], BundleBridgeParams[T], BundleBridgeEdgeParams[T], T]
 }

@@ -3,5 +3,5 @@
 package freechips
 
 package object rocketchip {
-  val config = chipsalliance.rocketchip.config
+  val config = _root_.diplomacy.config
 }

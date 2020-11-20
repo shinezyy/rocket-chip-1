@@ -7,6 +7,11 @@ import scala.math.min
 import scala.collection.{immutable, mutable}
 
 package object util {
+
+  val CompileOptions = _root_.diplomacy.CompileOptions
+  type HeterogeneousBag[T <: Data] = _root_.diplomacy.HeterogeneousBag[T]
+  val HeterogeneousBag = _root_.diplomacy.HeterogeneousBag
+
   implicit class UnzippableOption[S, T](val x: Option[(S, T)]) {
     def unzip = (x.map(_._1), x.map(_._2))
   }

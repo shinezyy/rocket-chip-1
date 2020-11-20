@@ -3,7 +3,7 @@
 package freechips.rocketchip.stage.phases
 
 
-import chipsalliance.rocketchip.config.Parameters
+import _root_.diplomacy.config.Parameters
 import firrtl.AnnotationSeq
 import firrtl.annotations.NoTargetAnnotation
 import firrtl.options.{Dependency, Phase, PreservesAll, Unserializable}
